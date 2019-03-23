@@ -13,50 +13,14 @@ c
 c OUTPUT:
 c p-value = p-value of the unconditional test
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-
-
+	function two_sample_poisson(k1, k2, n1, n2, iside, d)
 	implicit doubleprecision (a-h,o-z)
-
-1     print*,'Enter 1 for right-tail test or'
-	print*,'      2 for two-tail test'
-	print*,' '
-
-	read*, iside
-	if(iside .ne. 1 .and. iside .ne. 2) then
-	  goto 1
-	end if
-
-2     print*,'Enter the sample counts, k1 and k2'
-	read *, k1, k2
-	if(k1 .lt. 0.0d0 .or. k2 .lt. 0.0d0) then
-	  print*, 'k1 >= 0, k2 >= 0'
-	  goto 2
-	end if
-	print*,' '
-
-3     print*,'Enter the sample sizes n1 and n2'
-	read*, n1, n2
-	if(n1 .le. 0.0 .or. n2 .le. 0.0) then
-        print*, 'n1 > 0, n2 > 0'
-	  goto 3
-	end if
-	print*,' '
-
-4     print*,'Enter the value of mean1 - mean2 under H0:'
-	read*, d
-	if(d .lt. 0.0d0) then
-        print*, 'd >= 0'
-	  goto 4
-	end if
-	print*,' '
-
 	elhatk = 1.0d0*(k1+k2)/(n1+n2)-d*n1/(n1+n2)
 	var = (1.0d0*k1/n1**2 + 1.0d0*k2/n2**2)
 	t_k1k2 = (1.0d0*k1/n1-1.0d0*k2/n2-d)/sqrt(var)
-
 	call poistest(iside, n1, n2, elhatk, t_k1k2, d, pvalue)
-
-	print*, 'The p-value is', pvalue
+	two_sample_poisson=pvalue
+	return
 	end
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -66,6 +30,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 	subroutine poistest(iside, n1, n2, elhatk, t_k1k2, d, pvalue)
 	implicit doubleprecision(a-h,o-z)
+	intent(inout) :: pvalue
 
 	pvalue = 0.0d0
 
