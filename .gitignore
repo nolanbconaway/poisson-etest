@@ -1,0 +1,14 @@
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*.db
+*.p
+*.pickle
+venv/
+.venv/
+.env
+*.so.dSYM/
