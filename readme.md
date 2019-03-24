@@ -12,8 +12,3 @@ The code has a few problems, but i figured it'd be worth getting an intact versi
 3. Odd behavior at k=0.
 
 One day I plan on fixing these issues and putting it in pure python, assuming that doesn't also require a bit hit in efficiency.
-
-
-```
-python  -m numpy.f2py -c poisson_etest.f -m poisson_etest_fortran
-```

@@ -27,6 +27,6 @@ setup(
     long_description=long_description,
     install_requires=["numpy"],
     python_requires=">=3.6",
-    extras_require={"test": ["pytest", "tox"]},
+    extras_require={"test": ["pytest"]},
     ext_modules=[fortran_ext],
 )
