@@ -16,6 +16,8 @@ One day I'll fix these issues by reimplementing in pure python, assuming that do
 
 ## Install
 
+Numpy is a requirement for poisson-etest, so make sure that's installed first. Then:
+
 ```sh
 pip install poisson-etest
 ```
