@@ -1,7 +1,7 @@
 from numpy.distutils.core import setup, Extension
 
 long_description = """
-A numpy binding for the poisson E-Test, described in this paper:
+A numpy binding for the Poisson E-Test, described in this paper:
 
 http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf
 
@@ -13,7 +13,7 @@ http://www.ucs.louisiana.edu/~kxk4695/statcalc/pois2pval.for
 """
 
 fortran_ext = Extension(
-    "poisson_etest.poisson_etest_fortran", sources=["poisson_etest/poisson_etest.f"]
+    "poisson_etest.poisson_etest_fortran", sources=["lib/poisson_etest.f"]
 )
 
 setup(
@@ -29,4 +29,5 @@ setup(
     python_requires=">=3.6",
     extras_require={"test": ["pytest"]},
     ext_modules=[fortran_ext],
+    package_dir={"poisson_etest": "lib"},
 )
