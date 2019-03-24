@@ -1,4 +1,7 @@
-# poisson-etest
+# Python Poisson E-Test
+
+[![Build Status](https://travis-ci.org/nolanbconaway/poisson-etest.svg?branch=master)](https://travis-ci.org/nolanbconaway/poisson-etest)
+[![PyPI version](https://badge.fury.io/py/poisson-etest.svg)](https://badge.fury.io/py/poisson-etest)
 
 This library contains a function to compute a two-sample poisson E-test, as defined
 in [Krishnamoorthy & Thomson (2004)](http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf). I simply  edited the [fortran code](http://www.ucs.louisiana.edu/~kxk4695/statcalc/pois2pval.for) posted on Krishnamoorthy's website so that numpy could wrap it. You can look at the edits in one of the early commits to this repo.
@@ -13,8 +16,9 @@ One day I'll fix these issues by reimplementing in pure python, assuming that do
 
 ## Install
 
-> working... on pip
-
+```sh
+pip install poisson-etest
+```
 ## Usage
 
 Test whether two samples of Poisson data were drawn from the same distribution.
