@@ -1,14 +1,28 @@
 # poisson-etest
 
 This library contains a function to compute a two-sample poisson E-test, as defined
-in [Krishnamoorthy & Thomson (2004)](http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf).
+in [Krishnamoorthy & Thomson (2004)](http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf). I simply  edited the [fortran code](http://www.ucs.louisiana.edu/~kxk4695/statcalc/pois2pval.for) posted on Krishnamoorthy's website so that numpy could wrap it. You can look at the edits in one of the early commits to this repo.
 
-I basically minimally edited the [fortran code](http://www.ucs.louisiana.edu/~kxk4695/statcalc/pois2pval.for) posted on Krishnamoorthy's website so that numpy could wrap it.
+The code as it stands has a few problems, but I figured it'd be worth getting a direct implementation up. Here are some problems that I have noticed:
 
-The code has a few problems, but i figured it'd be worth getting an intact version up. here are the problems that I have found:
+1. Floats not supported for `k` and `n` values.
+2. Odd behavior with large numbers (I saw it at `k = n = 10000`).
+3. Odd behavior at `k = 0`.
 
-1. Floats not supported.
-2. Odd behavior with large numbers (I saw it at k = n = 10000).
-3. Odd behavior at k=0.
+One day I'll fix these issues by reimplementing in pure python, assuming that doesn't also require a big hit in efficiency.
 
-One day I plan on fixing these issues and putting it in pure python, assuming that doesn't also require a bit hit in efficiency.
+## Install
+
+> working... on pip
+
+## Usage
+
+Test whether two samples of Poisson data were drawn from the same distribution.
+
+```python
+>>> from poisson_etest import poisson_etest
+>>> sample1_k, sample1_n = 10, 20
+>>> sample2_k, sample2_n = 15, 20
+>>> poisson_etest(sample1_k, sample2_k, sample1_n, sample2_n)
+0.33116214285801826
+```
