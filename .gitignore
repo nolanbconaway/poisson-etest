@@ -12,3 +12,8 @@ venv/
 .venv/
 .env
 *.so.dSYM/
+.reference
+.pytest_cache
+*.so
+.tox
+MANIFEST
