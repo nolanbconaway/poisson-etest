@@ -22,6 +22,7 @@ if __name__ == "__main__":
     setup(
         name="poisson_etest",
         version="0.0",
+        url="https://github.com/nolanbconaway/poisson-etest",
         packages=["poisson_etest"],
         author="Nolan Conaway",
         author_email="nolanbconaway@gmail.com",
