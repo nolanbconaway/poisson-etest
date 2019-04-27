@@ -18,3 +18,4 @@ venv/
 .tox
 MANIFEST
 dist/
+*.egg-info

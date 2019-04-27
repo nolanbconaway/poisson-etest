@@ -1,4 +1,4 @@
-from numpy.distutils.core import Extension
+from setuptools import setup, find_packages
 
 long_description = """
 A numpy binding for the Poisson E-Test, described in this paper:
@@ -12,16 +12,14 @@ or via this link:
 http://www.ucs.louisiana.edu/~kxk4695/statcalc/pois2pval.for
 """
 
-fortran_ext = Extension(
-    "poisson_etest.poisson_etest_fortran", sources=["lib/poisson_etest.f"]
-)
+install_requires = ["scipy>=0.19.1"]
+test_requires = ["pytest"] + install_requires
 
 if __name__ == "__main__":
-    from numpy.distutils.core import setup
 
     setup(
         name="poisson_etest",
-        version="0.0",
+        version="0.01",
         url="https://github.com/nolanbconaway/poisson-etest",
         packages=["poisson_etest"],
         author="Nolan Conaway",
@@ -29,6 +27,7 @@ if __name__ == "__main__":
         description="A poisson e-test.",
         keywords=["poisson", "hypothesis testing", "statistics"],
         long_description=long_description,
-        ext_modules=[fortran_ext],
         package_dir={"poisson_etest": "lib"},
+        install_requires=install_requires,
+        extras_require={"test": test_requires},
     )
