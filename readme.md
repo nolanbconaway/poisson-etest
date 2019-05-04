@@ -48,4 +48,4 @@ not others:
 and exceptions are thrown downstream.
 4. *Not solved*: Nonzero `d` still sometimes creates complex numbers. In the pure python
 version an exception is later thrown, so I have disabled that option.
-5. New problem: it's noticeably slower for large `k` and `n` values (think ~1000).
+5. *New problem*: it's noticeably slower for large `k` and `n` values (think ~1000).
