@@ -1,11 +1,5 @@
 """Implement a two-sample poisson E-test."""
-import scipy.stats
 import math
-
-
-def sqrt(x):
-    """Compute the square root of a number, allowing negative/complex values."""
-    return pow(x, 0.5)
 
 
 def poisson_etest(
@@ -63,7 +57,7 @@ def poisson_etest(
     elhatk = (k1 + k2) / (n1 + n2) - d * n1 / (n1 + n2)
 
     var = k1 / (n1 ** 2) + k2 / (n2 ** 2)
-    t_k1k2 = (k1 / n1 - k2 / n2 - d) / sqrt(var)
+    t_k1k2 = (k1 / n1 - k2 / n2 - d) / math.sqrt(var)
 
     pvalue = 0
     elhat1 = n1 * (elhatk + d)
@@ -71,9 +65,16 @@ def poisson_etest(
     i1mode = math.floor(elhat1)
     i2mode = math.floor(elhat2)
 
-    pi1mode = scipy.stats.poisson.pmf(i1mode, elhat1)
+    def poisson_pdf(k, mu):
+        """Compute the poisson PDF of value K given mean mu.
+
+        This is the same as scipy.stats.poisson.pmf but faster and no external deps.
+        """
+        return math.exp(-mu + k * math.log(mu) - math.lgamma(k + 1))
+
+    pi1mode = poisson_pdf(i1mode, elhat1)
     pi1 = pi1mode
-    pi2mode = scipy.stats.poisson.pmf(i2mode, elhat2)
+    pi2mode = poisson_pdf(i2mode, elhat2)
 
     def sumi2(iside, n1, n2, elhat2, t_k1k2, i1, pi1, i2mode, pi2mode, d, pvalue):
         """Replicate the performance of the MATLAB version of the poisson etest code.
@@ -94,8 +95,7 @@ def poisson_etest(
                 if i1 / n1 - i2 / n2 <= d:
                     t_i1i2 = 0.0
                 else:
-                    t_i1i2 = diffi / sqrt(var)
-                print(t_i1i2 - t_k1k2)
+                    t_i1i2 = diffi / math.sqrt(var)
                 if t_i1i2 >= t_k1k2:
                     pvalue = pvalue + pi1 * pi2
 
@@ -103,7 +103,7 @@ def poisson_etest(
                 if abs(i1 / n1 - i2 / n2) <= d:
                     t_i1i2 = 0.0
                 else:
-                    t_i1i2 = diffi / sqrt(var)
+                    t_i1i2 = diffi / math.sqrt(var)
 
                 if abs(t_i1i2) >= abs(t_k1k2):
                     pvalue = pvalue + pi1 * pi2
@@ -126,7 +126,7 @@ def poisson_etest(
                 if i1 / n1 - i2 / n2 <= d:
                     t_i1i2 = 0.0
                 else:
-                    t_i1i2 = diffi / sqrt(var)
+                    t_i1i2 = diffi / math.sqrt(var)
 
                 if t_i1i2 >= t_k1k2:
                     pvalue = pvalue + pi1 * pi2
@@ -134,7 +134,7 @@ def poisson_etest(
                 if abs(i1 / n1 - i2 / n2) <= d:
                     t_i1i2 = 0.0
                 else:
-                    t_i1i2 = diffi / sqrt(var)
+                    t_i1i2 = diffi / math.sqrt(var)
                 if abs(t_i1i2) >= abs(t_k1k2):
                     pvalue = pvalue + pi1 * pi2
 

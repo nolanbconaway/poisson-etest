@@ -149,6 +149,11 @@ def test_valuerror_negative_k():
         poisson_etest(10, -10, 10, 10)
 
 
+def test_valuerror_double_zero_k():
+    with pytest.raises(ValueError):
+        poisson_etest(0, 0, 10, 10)
+
+
 def test_valuerror_invalid_alternative():
     with pytest.raises(ValueError):
         poisson_etest(10, 10, 10, 10, alternative="something")

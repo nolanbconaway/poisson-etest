@@ -5,14 +5,16 @@ A numpy binding for the Poisson E-Test, described in this paper:
 
 http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf
 
-I basically just minimally edited the original fortran code so that numpy f2py
+At first I minimally edited the original fortran code so that numpy f2py
 could pick it up. The original code can be found in an early commit to this repo
 or via this link:
 
 http://www.ucs.louisiana.edu/~kxk4695/statcalc/pois2pval.for
+
+Later, I implemented a pure Python variant.
 """
 
-install_requires = ["scipy>=0.19.1"]
+install_requires = []
 test_requires = ["pytest"] + install_requires
 
 if __name__ == "__main__":
