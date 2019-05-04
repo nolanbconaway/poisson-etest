@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 long_description = """
-A numpy binding for the Poisson E-Test, described in this paper:
+A function implementing the Poisson E-Test, described in this paper:
 
 http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf
 """
