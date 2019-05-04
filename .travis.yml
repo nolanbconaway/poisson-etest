@@ -1,7 +1,4 @@
 language: python
-addons:
-  apt_packages:
-    - gfortran
 python:
 - '3.6'
 install:
