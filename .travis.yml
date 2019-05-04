@@ -5,7 +5,6 @@ addons:
 python:
 - '3.6'
 install:
-- pip install pytest numpy
-- pip install .
+- pip install .[test]
 script:
 - pytest
